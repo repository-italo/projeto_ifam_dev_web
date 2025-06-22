@@ -4,7 +4,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     command: >
-      sh -c "../wait-for-it.sh python manage.py migrate &&
+      sh -c "../wait-for-it.sh &&
          gunicorn projeto_api.wsgi:application --bind 0.0.0.0:8000"
     ports:
       - "8000:8000"
