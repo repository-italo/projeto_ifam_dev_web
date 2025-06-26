@@ -26,7 +26,7 @@ services:
       - "4200:4200"
     volumes:
       - ./frontend:/app
-    command: npm start
+    command: npm start -- --host 0.0.0.0
     depends_on:
       - backend
     networks:

@@ -14,4 +14,4 @@ COPY . /app/
 EXPOSE 4200
 
 # Start the Angular dev server
-CMD ["npm", "run", "start"]
+CMD ["npm", "start", "--", "--host", "0.0.0.0"]
