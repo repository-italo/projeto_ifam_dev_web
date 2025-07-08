@@ -10,14 +10,8 @@ import { CommonModule } from '@angular/common';
 })
 export class ProdutosComponent {
 
-  produtos: Produto[] = [
-    new Produto('Produto A', 'Descrição do Produto A', 100),
-    new Produto('Produto B', 'Descrição do Produto B', 200),
-    new Produto('Produto C', 'Descrição do Produto C', 300)
-  ];
-
-};
-
+  produtos: Produto[];
+}
 @NgModule({
   declarations: [ProdutosComponent],
   imports: [CommonModule, ItemProdutoModule],

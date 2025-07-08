@@ -13,7 +13,6 @@ export class Cliente {
 
     toJson(): object {
         return {
-            id: this._id,
             nome: this.nome,
             email: this.email,
             cpf: this.cpf
