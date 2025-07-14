@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { SharedModule } from 'src/app/shared/shared-module';
-import { ProdutoDTO } from 'src/models/produto-model';
+import { Produto } from 'src/models/produto-model';
 import { ProdutoService } from 'src/services/produto.service';
 
 @Component({
@@ -44,7 +44,7 @@ export class ManageProdutoComponent implements OnInit {
     }
 
     loadProduto (id: number) {
-        this.produtoService.getProdutoById(id).subscribe(produto => {
+        this.produtoService.getById(id).subscribe(produto => {
             this.form.patchValue({
                 nome: produto.nome,
                 descricao: produto.descricao,
@@ -60,7 +60,7 @@ export class ManageProdutoComponent implements OnInit {
     onSubmit () {
         if (this.form.invalid) return;
 
-        const produtoData: ProdutoDTO = this.form.value;
+        const produtoData: Partial<Produto> = this.form.value;
 
         if (this.id) {
             this.produtoService.update(this.id, produtoData).subscribe({

@@ -38,7 +38,7 @@ export class ListClientesComponent implements OnInit {
     fetchClientes() {
         this.isFetching = true;
         this.subscriptions.add(
-            this.clienteService.getClientes().subscribe({
+            this.clienteService.get().subscribe({
                 next: (clientes) => {
                     this.clientes = clientes;
                     this.httpError = null;

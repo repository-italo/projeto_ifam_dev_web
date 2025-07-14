@@ -37,7 +37,7 @@ export class ListProdutosComponent implements OnInit, OnDestroy {
     fetchProdutos() {
         this.isFetching = true
         this.subscriptions.add(
-            this.produtoService.getProdutos().subscribe({
+            this.produtoService.get().subscribe({
                 next: (produtos) => {
                     this.produtos = produtos;
                     this.isFetching = false;

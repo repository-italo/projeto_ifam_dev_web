@@ -1,22 +1,12 @@
-export class Produto {
-    private _id: number;
-    public nome: string;
-    public descricao: string;
-    public preco_unitario: number;
+import { BaseModel } from "./base-model";
 
-    constructor(id: number, nome: string, descricao: string, preco_unitario: number) {
-        this._id = id;
-        this.nome = nome;
-        this.descricao = descricao;
-        this.preco_unitario = preco_unitario;
-    }
+export class Produto extends BaseModel<Produto> {
+    nome!: string;
+    descricao!: string;
+    preco_unitario!: number;
 
-    set id (id: number) {
-        this._id = id;
-    }
-
-    get id(): number {
-        return this._id;
+    constructor(model: Partial<Produto>) {
+        super(model);
     }
 
     toJSON(): object {
@@ -26,10 +16,4 @@ export class Produto {
           preco_unitario: this.preco_unitario
         };
     }
-}
-
-export interface ProdutoDTO {
-    nome: string;
-    descricao: string;
-    preco_unitario: number;
 }
