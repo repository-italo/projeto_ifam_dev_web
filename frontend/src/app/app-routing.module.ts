@@ -4,7 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
     {
         path: 'produtos',
-        loadChildren: () => import('./components/produtos/produtos.component').then(m => m.ProdutosModule)
+        loadChildren: () => import('./components/produtos/list-produtos/list-produtos.component').then(m => m.ListProdutosModule)
+    },
+    {
+        path: 'clientes',
+        loadChildren: () => import('./components/cliente/list-clientes/list-clientes.component').then(m => m.ListClientesModule)
     },
     {
         path: 'cliente',
@@ -14,10 +18,6 @@ const routes: Routes = [
         path: 'pedido',
         loadChildren: () => import('./components/pedido/pedido.component').then(m => m.PedidoModule)
     },
-    {
-        path: 'produto/:id',
-        loadChildren: () => import('./components/item-produto/item-produto.component').then(m => m.ItemProdutoModule)
-    }
 ];
 
 @NgModule({

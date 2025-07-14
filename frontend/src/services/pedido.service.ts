@@ -1,32 +1,43 @@
 import { Injectable } from "@angular/core";
+import { BaseService } from "./base.service";
+import { HttpClient } from "@angular/common/http";
+import {Pedido} from "../models/pedido-model"
+import { map } from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
-export class PedidoService {
+export class PedidoService extends BaseService {
 
-    constructor() {}
+    constructor(
+        private http: HttpClient
+    ) {
+        super();
+    }
 
-    getPedidos(): void {
-        //return this.pedidos;
+    getPedidos() {
+        return this.http.get<Pedido[]>(`${this.BASE_URL}/pedidos/`).pipe(
+            map((pedidos) => )
+        );
+    }
+
+    getPedidosByClienteId (id: number) {
+        return this.http.get<>
     }
 
     getPedidoById(id: number): any {
-        //return this.pedidos.find(pedido => pedido.id === id);
+
     }
 
-    addPedido(pedido: any): void {
-    //   this.pedidos.push(pedido);
+    create(pedido: any): void {
+
     }
 
-    updatePedido(id: number, updatedPedido: any): void {
-/*         const index = this.pedidos.findIndex(pedido => pedido.id === id);
-        if (index !== -1) {
-        this.pedidos[index] = updatedPedido;
-        } */
+    update(id: number, updatedPedido: any): void {
+
     }
 
-    deletePedido(id: number): void {
-        //this.pedidos = this.pedidos.filter(pedido => pedido.id !== id);
+    delete(id: number): void {
+
     }
 }

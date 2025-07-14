@@ -1,4 +1,4 @@
-import { Component, NgModule } from '@angular/core';
+import { Component, Input, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Cliente } from 'src/models/cliente-model';
 
@@ -8,7 +8,7 @@ import { Cliente } from 'src/models/cliente-model';
   styleUrls: ['./cliente.component.scss']
 })
 export class ClienteComponent {
-    cliente: Cliente = new Cliente(1, 'Italo', 'Pinheiro', '1234567890');
+    @Input() cliente!: Cliente;
 };
 
 @NgModule({

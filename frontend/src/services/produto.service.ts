@@ -1,32 +1,45 @@
 import { Injectable } from "@angular/core";
+import { BaseService } from "./base.service";
+import { HttpClient } from "@angular/common/http";
+import { Produto, ProdutoDTO } from "src/models/produto-model";
+import { map } from "rxjs";
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProdutoService {
+export class ProdutoService extends BaseService {
 
-  constructor() {}
-
-  getProdutos(): void {
-   // return this.produtos;
+  constructor(
+    private http: HttpClient
+  ) {
+    super();
   }
 
-  getProdutoById(id: number): any {
-    //return this.produtos.find(produto => produto.id === id);
+  getProdutos() {
+   return this.http.get<Produto[]>(`${this.BASE_URL}/produtos/`).pipe(
+        map((produtos) => produtos.map(produto => new Produto(produto.id, produto.nome, produto.descricao, produto.preco_unitario)))
+   )
   }
 
-  addProduto(produto: any): void {
-   // this.produtos.push(produto);
+  getProdutoById(id: number) {
+    return this.http.get<Produto>(`${this.BASE_URL}/produtos/${id}/`).pipe(
+      map(produto => new Produto(produto.id, produto.nome, produto.descricao, produto.preco_unitario))
+    );
   }
 
-  updateProduto(id: number, updatedProduto: any): void {
-   /*  const index = this.produtos.findIndex(produto => produto.id === id);
-    if (index !== -1) {
-      this.produtos[index] = updatedProduto;
-    } */
+  create(produto: ProdutoDTO) {
+    return this.http.post<Produto>(`${this.BASE_URL}/produtos/`, produto).pipe(
+      map(produto => new Produto(produto.id, produto.nome, produto.descricao, produto.preco_unitario))
+    )
   }
 
-  deleteProduto(id: number): void {
-  //  this.produtos = this.produtos.filter(produto => produto.id !== id);
+  update(id: number, updatedProduto: any) {
+    return this.http.put<Produto>(`${this.BASE_URL}/produtos/${id}/`, updatedProduto).pipe(
+        map(produto => new Produto(produto.id, produto.nome, produto.descricao, produto.preco_unitario))
+    );
   }
+
+    delete(id: number) {
+        return this.http.delete(`${this.BASE_URL}/produtos/${id}/`);
+    }
 }

@@ -1,0 +1,16 @@
+header {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(23, 99, 73);
+    color: bisque;
+}
+
+::ng-deep {
+    .p-card-header {
+        display: flex;
+        align-items: center;
+    }
+
+    .p-button-icon {
+        width: 30px;
+    }
+}

@@ -1,13 +1,13 @@
 export class Cliente {
     private _id: number;
     public nome: string;
-    public email: string;
+    public sobrenome: string;
     public cpf: string;
 
-    constructor(id: number, nome: string, email: string, cpf: string) {
+    constructor(id: number, nome: string, sobrenome: string, cpf: string) {
         this._id = id;
         this.nome = nome;
-        this.email = email;
+        this.sobrenome = sobrenome;
         this.cpf = cpf;
     }
 
@@ -18,8 +18,14 @@ export class Cliente {
     toJson(): object {
         return {
             nome: this.nome,
-            email: this.email,
+            sobrenome: this.sobrenome,
             cpf: this.cpf
         };
     }
+}
+
+export interface ClienteDTO {
+    nome: string;
+    sobrenome: string;
+    cpf: string;
 }

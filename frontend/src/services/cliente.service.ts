@@ -1,27 +1,44 @@
 import { Injectable } from "@angular/core";
-import { Cliente } from "src/models/cliente-model";
+import { Cliente, ClienteDTO } from "src/models/cliente-model";
+import { HttpClient } from "@angular/common/http";
+import { environment } from "src/environments/environment";
+import { BaseService } from "./base.service";
+import { map } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ClienteService {
+export class ClienteService extends BaseService {
 
-    getClientes(): void {
-        //return this.clientes;
+    constructor(private http: HttpClient) {
+        super();
+     }
+
+    getClientes() {
+        return this.http.get<Cliente[]>(`${this.BASE_URL}/clientes/`).pipe(
+            map((clients) => clients.map(client => new Cliente(client.id, client.nome, client.sobrenome, client.cpf)))
+        )
     }
 
-    getClienteById(id: number): void {
-        //return this.clientes.find(cliente => cliente.id === id);
+    getClienteById(id: number) {
+        return this.http.get<Cliente>(`${this.BASE_URL}/clientes/${id}/`).pipe(
+            map(client => new Cliente(client.id, client.nome, client.sobrenome, client.cpf))
+        );
     }
 
-    addCliente(cliente: any): void {
-       // this.clientes.push(cliente);
+    create(cliente: ClienteDTO) {
+        return this.http.post<Cliente>(`${this.BASE_URL}/clientes/`, cliente).pipe(
+            map(client => new Cliente(client.id, client.nome, client.sobrenome, client.cpf))
+        );
     }
 
-    updateCliente(id: number, updatedCliente: any): void {
-        //const index = this.clientes.findIndex(cliente => cliente.id === id);
-        //if (index !== -1) {
-        //    this.clientes[index] = updatedCliente;
-      //  }
+    update(id: number, updatedCliente: ClienteDTO) {
+        return this.http.put<Cliente>(`${this.BASE_URL}/clientes/${id}/`, updatedCliente).pipe(
+            map(client => new Cliente(client.id, client.nome, client.sobrenome, client.cpf))
+        );
+    }
+
+    delete(id: number) {
+        return this.http.delete(`${this.BASE_URL}/clientes/${id}/`);
     }
 }

@@ -1,0 +1,73 @@
+<header class="fs-3 text-center py-4" >
+    Lista de Clientes
+</header>
+
+<div class="container bg-light d-flex flex-column">
+    <div class="fs-3 text-light text-end">
+        Clientes
+    </div>
+        <div class="d-flex justify-content-end mb-3">
+
+
+    <div *ngIf="clientes" class="d-flex flex-wrap flex-row">
+        <ng-container *ngFor="let cliente of clientes">
+            <p-card [header]="cliente.nome" [style]="{width: '300px', margin: '2em'}">
+                <ng-template pTemplate="header">
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <img alt="Profile Pic" class="w-75" src="assets/profile_pic.svg">
+                    </div>
+                </ng-template>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <button pButton type="button" label="Conferir Pedidos"></button>
+                </div>
+                <div class="p-3">
+                    <div><strong>Nome:</strong> {{ cliente.nome }} {{cliente.sobrenome}}</div>
+                    <div><strong>CPF:</strong> {{ cliente.cpf }}</div>
+                </div>
+                <ng-template pTemplate="footer">
+                    <div class="d-flex justify-content-between align-content-center">
+                        <button
+                            pButton
+                            pRipple
+                            type="button"
+                            icon="pi pi-user-edit"
+                            class="p-button-rounded p-button-secondary p-button-text"
+                            (click)="redirectToManage(cliente)">
+                        </button>
+                        <button
+                            pButton
+                            pRipple
+                            icon="pi pi-trash"
+                            class="p-button-rounded p-button-danger p-button-text "
+                            (click)="confirmDeletion(cliente)">
+                        </button>
+                    </div>
+                </ng-template>
+            </p-card>
+        </ng-container>
+        <div class="d-flex justify-content-center align-items-center">
+            <button
+                pButton
+                type="button"
+                icon="pi pi-plus"
+                class="p-button-rounded p-button-success"
+                label="Adicionar"
+                [style]="{width: '100px', height: '100px', margin: '2em'}"
+                (click)="redirectToManage()">
+            </button>
+        </div>
+    </div>
+    <div *ngIf="!clientes && isFetching" class="text-center mt-4">
+        <p-progressSpinner [style]="{width: '50px', height: '50px'}" strokeWidth="8" animationDuration="1000"></p-progressSpinner>
+        <p class="mt-2">Carregando clientes...</p>
+    </div>
+    <div *ngIf="httpError && !isFetching" class="text-danger text-center mt-4">
+        <p>{{ httpError }}</p>
+    </div>
+    <div *ngIf="clientes.length === 0 && !isFetching && !httpError">
+        <p>Nenhum Cliente Encontrado.</p>
+    </div>
+
+</div>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+<p-toast></p-toast>
