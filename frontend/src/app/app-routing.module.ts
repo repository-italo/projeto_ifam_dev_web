@@ -15,8 +15,8 @@ const routes: Routes = [
         loadChildren: () => import('./components/cliente/cliente.component').then(m => m.ClienteModule)
     },
     {
-        path: 'pedido',
-        loadChildren: () => import('./components/pedido/pedido.component').then(m => m.ListPedidoModule)
+        path: 'pedidos',
+        loadChildren: () => import('./components/pedido/list-pedidos/list-pedidos.component').then(m => m.ListPedidosModule)
     },
 ];
 

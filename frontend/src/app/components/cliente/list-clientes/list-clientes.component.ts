@@ -93,6 +93,10 @@ export class ListClientesComponent implements OnInit {
         }
     }
 
+    goToPedidos(cliente: Cliente) {
+        this.router.navigate(['/pedidos', cliente.id]);
+    }
+
 }
 
 @NgModule({

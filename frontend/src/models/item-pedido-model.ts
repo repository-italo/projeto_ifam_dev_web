@@ -1,10 +1,10 @@
 import { BaseModel } from "./base-model";
 
 export class ItemPedido extends BaseModel<ItemPedido> {
-    pedidoId!: number;
+    pedido!: number;
     quantidade!: number;
-    produtoId!: number;
-    clienteId!: number;
+    produto!: number;
+    preco_unitario!: number;
 
     constructor(data: Partial<ItemPedido>) {
         super(data);

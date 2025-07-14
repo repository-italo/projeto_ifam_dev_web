@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { SharedModule } from 'src/app/shared/shared-module';
-import { ClienteDTO } from 'src/models/cliente-model';
+import { Cliente } from 'src/models/cliente-model';
 import { ClienteService } from 'src/services/cliente.service';
 
 @Component({
@@ -47,7 +47,7 @@ export class ManageClienteComponent implements OnInit {
     }
 
     loadCliente(id: number) {
-        this.clienteService.getClienteById(id).subscribe(cliente => {
+        this.clienteService.getById(id).subscribe(cliente => {
             this.form.patchValue({
                 nome: cliente.nome,
                 sobrenome: cliente.sobrenome,
@@ -59,7 +59,7 @@ export class ManageClienteComponent implements OnInit {
     onSubmit() {
         if (this.form.invalid) return;
 
-        const clienteData: ClienteDTO = this.form.value;
+        const clienteData: Partial<Cliente> = this.form.value;
 
         if (this.id) {
             this.clienteService.update(this.id, clienteData).subscribe({

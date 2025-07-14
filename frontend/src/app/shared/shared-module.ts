@@ -8,6 +8,9 @@ import { ConfirmDialogModule } from "primeng/confirmdialog";
 import { ToastModule } from "primeng/toast";
 import {InputTextModule} from "primeng/inputtext";
 import {ProgressSpinnerModule} from 'primeng/progressspinner'
+import { DropdownModule } from "primeng/dropdown";
+import { FormsModule } from '@angular/forms';
+import { TableModule } from "primeng/table";
 
 @NgModule({
     imports: [
@@ -16,8 +19,11 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner'
         InputTextModule,
         ToastModule,
         ConfirmDialogModule,
+        TableModule,
+        DropdownModule,
         CardModule,
         ProgressSpinnerModule,
+        FormsModule,
         HttpClientModule,
     ],
     providers: [MessageService, ConfirmationService],
@@ -26,9 +32,12 @@ import {ProgressSpinnerModule} from 'primeng/progressspinner'
         ButtonModule,
         InputTextModule,
         ToastModule,
+        DropdownModule,
+        TableModule,
         ConfirmDialogModule,
         CardModule,
         ProgressSpinnerModule,
+        FormsModule,
         HttpClientModule,
     ]
 })
